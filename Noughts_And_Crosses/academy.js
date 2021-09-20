@@ -27,17 +27,43 @@ function takeTurn(row, column) {
 // Otherwise return null to continue playing.
 function checkWinner() {
     function checkWinnerRow(){
-        for (let entry of board){
-            if (entry === ['nought', 'nought', 'nought']){
-                return "noughts"
+        for (let i=0; i <= 2; i+=1){
+            if (board[i][0] == 'nought' && board[i][1] == 'nought' && board[i][2] == 'nought'){
+               return 'noughts' 
             }
-            if (entry === ['cross','cross','cross']){
-                return "crosses"
+            if (board[i][0] == 'cross' && board[i][1] == 'cross' && board[i][2] == 'cross'){
+                return 'crosses'
+            }
+        }
+    }        
+    function checkWinnerColumn(){
+        for (let i=0; i<=2; i+=1){
+            if (board[0][i] == 'nought' && board[1][i] == 'nought' && board[2][i] == 'nought'){
+                return 'noughts'
+            }
+            if (board[0][i] == 'cross' && board[1][i] == 'cross' && board[2][i] == 'cross'){
+                return 'crosses'
             }
         }
     }
+    function checkWinnerDiagonal(){
+            if (board[0][0] == 'nought' && board[1][1] == 'nought' && board[2][2] == 'nought'){
+                return 'noughts'
+            }
+            if (board[0][0] == 'cross' && board[1][1] == 'cross' && board[2][2] == 'cross'){
+                return 'crosses'
+            }
+            if (board[0][2] == 'nought' && board[1][1] == 'nought' && board[2][0] == 'nought'){
+                return 'noughts'
+            }
+            if (board[0][2] == 'cross' && board[1][1] == 'cross' && board[2][0] == 'cross'){
+                return 'crosses'
+            } 
+    }
+    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonal()]
+    //winner.reduce
     console.log("checkWinner was called");
-    return (checkWinnerRow())
+    return (winner)
 }
 
 // Set the game state back to its original state to play another game.
