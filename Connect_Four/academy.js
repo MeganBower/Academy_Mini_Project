@@ -3,7 +3,12 @@
 // Take the row and column number between 0 and 2 
 // (inclusive) and update the game state.
 
-let board = [[null,null,null],[null,null,null],[null,null,null]]
+let board = [[null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null]]
 
 let playerTurn = 'noughts'
 
@@ -88,7 +93,12 @@ function checkWinner() {
 
 // Set the game state back to its original state to play another game.
 function resetGame() {
-    board = [[null,null,null],[null,null,null],[null,null,null]]
+    board = [[null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null],
+             [null,null,null,null,null,null,null]]
     console.log("resetGame was called")
     return board
 }

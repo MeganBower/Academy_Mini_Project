@@ -12,8 +12,8 @@ for (f of functions) {
 
 // Clear down the elements drawn on the board.
 function clearBoard() {
-    for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-        for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+    for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < 7; columnIndex++) {
             document.getElementById(`row-${rowIndex}-column-${columnIndex}`).innerHTML = ""
         }
     }
@@ -22,8 +22,8 @@ function clearBoard() {
 // Populate the grid with images based on the board state.
 function drawBoard(board) {
     clearBoard();
-    for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-        for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+    for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < 7; columnIndex++) {
             if (!board[rowIndex][columnIndex]) {
                 continue;
             }
@@ -33,7 +33,7 @@ function drawBoard(board) {
 }
 
 function isValidRowOrColumn(array) {
-    return Array.isArray(array) && array.length === 3;
+    return Array.isArray(array) && array.length === 6 || array.length === 7;
 }
 
 function isValidColumn(columnArray) {
@@ -71,8 +71,8 @@ function resetClick(event) {
 }
 
 // Bind the click events for the grid.
-for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-    for (let columnIndex = 0; columnIndex < 3; columnIndex++) {
+for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
+    for (let columnIndex = 0; columnIndex < 7; columnIndex++) {
         const gridPosition = document.getElementById(`row-${rowIndex}-column-${columnIndex}`);
         gridPosition.addEventListener("click", positionClick.bind(null, rowIndex, columnIndex));
     }

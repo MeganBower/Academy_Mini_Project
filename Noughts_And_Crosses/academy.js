@@ -86,7 +86,8 @@ function checkWinner() {
     }
 }
 
-// !boardState.flat().includes(null)
+// !boardState.flat().includes(null) - checks all entries not null
+
 // Set the game state back to its original state to play another game.
 function resetGame() {
     board = [[null,null,null],[null,null,null],[null,null,null]]
