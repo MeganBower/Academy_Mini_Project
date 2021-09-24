@@ -81,11 +81,12 @@ function checkWinner() {
         return 'crosses'
     }
     //checking all entries are not null
-    if (board.every(entry => entry.includes(null) === false) === true){
+    if (board.every(entry => !entry.includes(null))){
         return 'nobody'
     }
 }
 
+// !boardState.flat().includes(null)
 // Set the game state back to its original state to play another game.
 function resetGame() {
     board = [[null,null,null],[null,null,null],[null,null,null]]
