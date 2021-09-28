@@ -27,7 +27,7 @@ function drawBoard(board) {
             if (!board[rowIndex][columnIndex]) {
                 continue;
             }
-            document.getElementById(`row-${rowIndex}-column-${columnIndex}`).innerText = board[rowIndex][columnIndex] === "nought" ? "⭕" : "❌";
+            document.getElementById(`row-${rowIndex}-column-${columnIndex}`).innerText = board[rowIndex][columnIndex] === "purple" ? "🟣" : "🟠";
         }
     }
 }
@@ -37,7 +37,7 @@ function isValidRowOrColumn(array) {
 }
 
 function isValidColumn(columnArray) {
-    return isValidRowOrColumn(columnArray) && columnArray.every(function (item) { return ["nought", "cross", null].includes(item); });
+    return isValidRowOrColumn(columnArray) && columnArray.every(function (item) { return ["purple", "orange", null].includes(item); });
 }
 
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
@@ -48,6 +48,16 @@ function positionClick(rowIndex, columnIndex, event) {
         throw "Expecting 'getBoard' to return a 2d array where all values match are null or one of the strings 'nought' or 'cross'. Actually received: " + JSON.stringify(board);
     }
     drawBoard(board);
+    const errorColumnFull = checkingNextEmptyRow(columnIndex);
+    if (errorColumnFull === 'full'){
+        const errorDisplay = document.getElementById("column-full-display");
+        errorDisplay.style.display = "block";
+        function closeError(){
+            document.getElementById("column-full-display").style.display=" none";
+            }
+            window.setTimeout(closeError, 2000 )
+
+    }
     const winner = checkWinner();
     if (winner) {
         if (typeof winner !== "string" || !["noughts", "crosses", "nobody"].includes(winner)) {

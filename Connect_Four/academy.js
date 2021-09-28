@@ -10,17 +10,35 @@ let board = [[null,null,null,null,null,null,null],
              [null,null,null,null,null,null,null],
              [null,null,null,null,null,null,null]]
 
-let playerTurn = 'noughts'
+let playerTurn = 'purple'
+
+function checkingNextEmptyRow (column){
+    let emptyRow = ''
+    if(board[0][column] !== null){
+        return 'full'
+    }
+    for (row = 0; row <= 5; row++){
+        if (board[row][column] === null){
+            emptyRow = row
+        } 
+    }
+    return emptyRow
+}
 
 function takeTurn(row, column) {
-    if (playerTurn === 'noughts'){
-        board[row][column] = "nought"
-        playerTurn = 'crosses'
+    if (checkingNextEmptyRow(column) === 'full'){
+        console.log('Column is full - try a different one')
+        return board
+    }
+
+    if (playerTurn === 'purple'){   
+        board[checkingNextEmptyRow(column)][column] = "purple"
+        playerTurn = 'orange'
         console.log(board)
     }
-    else{
-        board[row][column] = "cross"
-        playerTurn = 'noughts'
+    else {
+        board[checkingNextEmptyRow(column)][column] = "orange"
+        playerTurn = 'purple'
         console.log(board)
     }
     
@@ -28,16 +46,16 @@ function takeTurn(row, column) {
     return board
 }
 
-// Return either "noughts", "crosses" or "nobody" if the game is over.
+// Return either "purple", "orange" or "nobody" if the game is over.
 // Otherwise return null to continue playing.
 function checkWinnerRow(){
     let winner = ''
     for (let i=0; i < 3; i++){
-        if (board[i][0] == 'nought' && board[i][1] == 'nought' && board[i][2] == 'nought'){
-            winner = 'noughts' 
+        if (board[i][0] == 'purple' && board[i][1] == 'purple' && board[i][2] == 'purple'){
+            winner = 'purple' 
         }
-        if (board[i][0] == 'cross' && board[i][1] == 'cross' && board[i][2] == 'cross'){
-            winner = 'crosses'
+        if (board[i][0] == 'orange' && board[i][1] == 'orange' && board[i][2] == 'orange'){
+            winner = 'orange'
         }
     }
     return winner
@@ -46,28 +64,28 @@ function checkWinnerRow(){
 function checkWinnerColumn(){
     let winner = ''
     for (let i=0; i < 3; i++){
-        if (board[0][i] == 'nought' && board[1][i] == 'nought' && board[2][i] == 'nought'){
-            winner = 'noughts'
+        if (board[0][i] == 'purple' && board[1][i] == 'purple' && board[2][i] == 'purple'){
+            winner = 'purple'
         }
-        if (board[0][i] == 'cross' && board[1][i] == 'cross' && board[2][i] == 'cross'){
-            winner = 'crosses'
+        if (board[0][i] == 'orange' && board[1][i] == 'orange' && board[2][i] == 'orange'){
+            winner = 'orange'
         }
     }
     return winner
 }
 
 function checkWinnerDiagonal(){
-    if (board[0][0] == 'nought' && board[1][1] == 'nought' && board[2][2] == 'nought'){
-        return 'noughts'
+    if (board[0][0] == 'purple' && board[1][1] == 'purple' && board[2][2] == 'purple'){
+        return 'purple'
     }
-    if (board[0][0] == 'cross' && board[1][1] == 'cross' && board[2][2] == 'cross'){
-        return 'crosses'
+    if (board[0][0] == 'orange' && board[1][1] == 'orange' && board[2][2] == 'orange'){
+        return 'orange'
     }
-    if (board[0][2] == 'nought' && board[1][1] == 'nought' && board[2][0] == 'nought'){
-        return 'noughts'
+    if (board[0][2] == 'purple' && board[1][1] == 'purple' && board[2][0] == 'purple'){
+        return 'purple'
     }
-    if (board[0][2] == 'cross' && board[1][1] == 'cross' && board[2][0] == 'cross'){
-        return 'crosses'
+    if (board[0][2] == 'orange' && board[1][1] == 'orange' && board[2][0] == 'orange'){
+        return 'orange'
     } 
     else {
         return ''
@@ -79,11 +97,11 @@ function checkWinner() {
     console.log("checkWinner was called");
     console.log(winner)
 
-    if (winner.includes('noughts')){
-        return 'noughts'
+    if (winner.includes('purple')){
+        return 'purple'
     }
-    if (winner.includes('crosses')){
-        return 'crosses'
+    if (winner.includes('orange')){
+        return 'orange'
     }
     //checking all entries are not null
     if (board.every(entry => entry.includes(null) === false) === true){
@@ -103,7 +121,7 @@ function resetGame() {
     return board
 }
 
-// Return the current board state with either a "nought" or a "cross" in
+// Return the current board state with either a "purple" or a "orange" in
 // each position. Put a null in a position that hasn't been played yet.
 function getBoard() {
     console.log("getBoard was called");

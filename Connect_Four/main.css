@@ -1,19 +1,21 @@
 #gameBoard {
-	background: pink;  
+	/*background: pink;  */
 	width: 730px;
 	cursor: pointer;
     display: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .column {
     width: 50px;
     height: 50px;
     margin: 0px;
-    border: 2px black solid;
+    border: 2px pink solid;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 80px;
+    font-size: 40px;
 }
 
 .row {
@@ -34,9 +36,25 @@
     color: white;
 }
 
+#column-full-display {
+    display: none;
+    background-color: red;
+    color: white;
+}
+
 body {
     text-align: center;
 }
+h1 {
+    font-size: 40px;
+    animation: blinker 1s linear infinite;
+      }
+      
+      @keyframes blinker {
+        50% {
+          opacity: 0;
+        }
+    }
 
 #reset-button{
     margin-top: 10px;
