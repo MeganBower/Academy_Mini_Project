@@ -34,6 +34,17 @@
     display: none;
     background-color: red;
     color: white;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 20px;
+    width: 400px;
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+      opacity: 0;
+    }
 }
 
 #column-full-display {
@@ -41,7 +52,7 @@
     color: red;
     margin-left: auto;
     margin-right: auto;
-    font-size: 15px
+    font-size: 15px;
 }
 
 body {
@@ -49,14 +60,7 @@ body {
 }
 h1 {
     font-size: 40px;
-    animation: blinker 1s linear infinite;
       }
-      
-      @keyframes blinker {
-        50% {
-          opacity: 0;
-        }
-    }
 
 #reset-button{
     margin-top: 10px;
