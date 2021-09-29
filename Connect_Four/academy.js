@@ -30,14 +30,14 @@ function takeTurn(row, column) {
         console.log('Column is full - try a different one')
         return board
     }
-
+    let rowIndex = checkingNextEmptyRow(column)
     if (playerTurn === 'purple'){   
-        board[checkingNextEmptyRow(column)][column] = "purple"
+        board[rowIndex][column] = "purple"
         playerTurn = 'orange'
         console.log(board)
     }
     else {
-        board[checkingNextEmptyRow(column)][column] = "orange"
+        board[rowIndex][column] = "orange"
         playerTurn = 'purple'
         console.log(board)
     }
@@ -50,12 +50,14 @@ function takeTurn(row, column) {
 // Otherwise return null to continue playing.
 function checkWinnerRow(){
     let winner = ''
-    for (let i=0; i < 3; i++){
-        if (board[i][0] == 'purple' && board[i][1] == 'purple' && board[i][2] == 'purple'){
-            winner = 'purple' 
-        }
-        if (board[i][0] == 'orange' && board[i][1] == 'orange' && board[i][2] == 'orange'){
-            winner = 'orange'
+    for (let rowIndex=5; rowIndex >= 0; rowIndex--){
+        for (let cell = 0; cell < 4; cell++){
+            if (board[rowIndex][cell] == 'purple' && board[rowIndex][cell+1] == 'purple' && board[rowIndex][cell+2] == 'purple' && board[rowIndex][cell+3] == 'purple'){
+                winner = 'purple' 
+            }
+            if (board[rowIndex][cell] == 'orange' && board[rowIndex][cell+1] == 'orange' && board[rowIndex][cell+2] == 'orange' && board[rowIndex][cell+3] == 'orange'){
+                winner = 'orange' 
+            }
         }
     }
     return winner
@@ -63,12 +65,14 @@ function checkWinnerRow(){
 
 function checkWinnerColumn(){
     let winner = ''
-    for (let i=0; i < 3; i++){
-        if (board[0][i] == 'purple' && board[1][i] == 'purple' && board[2][i] == 'purple'){
-            winner = 'purple'
-        }
-        if (board[0][i] == 'orange' && board[1][i] == 'orange' && board[2][i] == 'orange'){
-            winner = 'orange'
+    for (let columnIndex = 0; columnIndex < 7; columnIndex++){
+        for(let row = 5; row>2; row--){
+            if (board[row][columnIndex] == 'purple' && board[row-1][columnIndex] == 'purple' && board[row-2][columnIndex] == 'purple' && board[row-3][columnIndex] == 'purple'){
+                winner = 'purple'
+            }
+            if (board[row][columnIndex] == 'orange' && board[row-1][columnIndex] == 'orange' && board[row-2][columnIndex] == 'orange' && board[row-3][columnIndex] == 'orange'){
+                winner = 'orange'
+            }
         }
     }
     return winner
