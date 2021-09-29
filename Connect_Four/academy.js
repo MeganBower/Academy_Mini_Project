@@ -111,8 +111,23 @@ function checkWinnerDiagonalUp(){
     return winner
 }
 
+function checkWinnerDiagonalDown(){
+    let winner = ''
+    for(let rowIndex=0; rowIndex<3; rowIndex++){
+        for(let columnIndex=0; columnIndex<4; columnIndex++){
+            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex+1][columnIndex+1] == 'purple' && board[rowIndex+2][columnIndex+2] == 'purple' && board[rowIndex+3][columnIndex+3] == 'purple'){
+                winner = 'purple'
+            }
+            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex+1][columnIndex+1] == 'orange' && board[rowIndex+2][columnIndex+2] == 'orange' && board[rowIndex+3][columnIndex+3] == 'orange'){
+                winner = 'orange'
+            }
+        }
+    }
+    return winner
+}
+
 function checkWinner() {
-    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp()]
+    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp(),checkWinnerDiagonalDown()]
     console.log("checkWinner was called");
     console.log(winner)
 
