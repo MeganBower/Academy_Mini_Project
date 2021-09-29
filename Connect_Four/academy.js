@@ -78,26 +78,41 @@ function checkWinnerColumn(){
     return winner
 }
 
-function checkWinnerDiagonal(){
-    if (board[0][0] == 'purple' && board[1][1] == 'purple' && board[2][2] == 'purple'){
-        return 'purple'
+// function checkWinnerDiagonal(){
+//     if (board[0][0] == 'purple' && board[1][1] == 'purple' && board[2][2] == 'purple'){
+//         return 'purple'
+//     }
+//     if (board[0][0] == 'orange' && board[1][1] == 'orange' && board[2][2] == 'orange'){
+//         return 'orange'
+//     }
+//     if (board[0][2] == 'purple' && board[1][1] == 'purple' && board[2][0] == 'purple'){
+//         return 'purple'
+//     }
+//     if (board[0][2] == 'orange' && board[1][1] == 'orange' && board[2][0] == 'orange'){
+//         return 'orange'
+//     } 
+//     else {
+//         return ''
+//     }
+// }
+
+function checkWinnerDiagonalUp(){
+    let winner = ''
+    for(let rowIndex=5; rowIndex>2; rowIndex--){
+        for(let columnIndex=0; columnIndex<4; columnIndex++){
+            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex-1][columnIndex+1] == 'purple' && board[rowIndex-2][columnIndex+2] == 'purple' && board[rowIndex-3][columnIndex+3] == 'purple'){
+                winner = 'purple'
+            }
+            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex-1][columnIndex+1] == 'orange' && board[rowIndex-2][columnIndex+2] == 'orange' && board[rowIndex-3][columnIndex+3] == 'orange'){
+                winner = 'orange'
+            }
+        }
     }
-    if (board[0][0] == 'orange' && board[1][1] == 'orange' && board[2][2] == 'orange'){
-        return 'orange'
-    }
-    if (board[0][2] == 'purple' && board[1][1] == 'purple' && board[2][0] == 'purple'){
-        return 'purple'
-    }
-    if (board[0][2] == 'orange' && board[1][1] == 'orange' && board[2][0] == 'orange'){
-        return 'orange'
-    } 
-    else {
-        return ''
-    }
+    return winner
 }
 
 function checkWinner() {
-    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonal()]
+    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp()]
     console.log("checkWinner was called");
     console.log(winner)
 
