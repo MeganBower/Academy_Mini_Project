@@ -3,35 +3,35 @@
 // Take the row and column number between 0 and 2 
 // (inclusive) and update the game state.
 
-let board = [[null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null]]
+let board = [[null, null, null, null, null, null, null],
+[null, null, null, null, null, null, null],
+[null, null, null, null, null, null, null],
+[null, null, null, null, null, null, null],
+[null, null, null, null, null, null, null],
+[null, null, null, null, null, null, null]]
 
 let playerTurn = 'purple'
 
-function checkingNextEmptyRow (column){
+function checkingNextEmptyRow(column) {
     let emptyRow = ''
-    if(board[0][column] !== null){
+    if (board[0][column] !== null) {
         return 'full'
     }
-    for (row = 0; row <= 5; row++){
-        if (board[row][column] === null){
+    for (row = 0; row <= 5; row++) {
+        if (board[row][column] === null) {
             emptyRow = row
-        } 
+        }
     }
     return emptyRow
 }
 
 function takeTurn(row, column) {
-    if (checkingNextEmptyRow(column) === 'full'){
+    if (checkingNextEmptyRow(column) === 'full') {
         console.log('Column is full - try a different one')
         return board
     }
     let rowIndex = checkingNextEmptyRow(column)
-    if (playerTurn === 'purple'){   
+    if (playerTurn === 'purple') {
         board[rowIndex][column] = "purple"
         playerTurn = 'orange'
         console.log(board)
@@ -41,36 +41,21 @@ function takeTurn(row, column) {
         playerTurn = 'purple'
         console.log(board)
     }
-    
-    console.log("takeTurn was called with row: "+row+", column:"+column);
+
+    console.log("takeTurn was called with row: " + row + ", column:" + column);
     return board
 }
 
 // Return either "purple", "orange" or "nobody" if the game is over.
 // Otherwise return null to continue playing.
-function checkWinnerRow(){
+function checkWinnerRow() {
     let winner = ''
-    for (let rowIndex=5; rowIndex >= 0; rowIndex--){
-        for (let cell = 0; cell < 4; cell++){
-            if (board[rowIndex][cell] == 'purple' && board[rowIndex][cell+1] == 'purple' && board[rowIndex][cell+2] == 'purple' && board[rowIndex][cell+3] == 'purple'){
-                winner = 'purple' 
-            }
-            if (board[rowIndex][cell] == 'orange' && board[rowIndex][cell+1] == 'orange' && board[rowIndex][cell+2] == 'orange' && board[rowIndex][cell+3] == 'orange'){
-                winner = 'orange' 
-            }
-        }
-    }
-    return winner
-}
-
-function checkWinnerColumn(){
-    let winner = ''
-    for (let columnIndex = 0; columnIndex < 7; columnIndex++){
-        for(let row = 5; row>2; row--){
-            if (board[row][columnIndex] == 'purple' && board[row-1][columnIndex] == 'purple' && board[row-2][columnIndex] == 'purple' && board[row-3][columnIndex] == 'purple'){
+    for (let rowIndex = 5; rowIndex >= 0; rowIndex--) {
+        for (let cell = 0; cell < 4; cell++) {
+            if (board[rowIndex][cell] == 'purple' && board[rowIndex][cell + 1] == 'purple' && board[rowIndex][cell + 2] == 'purple' && board[rowIndex][cell + 3] == 'purple') {
                 winner = 'purple'
             }
-            if (board[row][columnIndex] == 'orange' && board[row-1][columnIndex] == 'orange' && board[row-2][columnIndex] == 'orange' && board[row-3][columnIndex] == 'orange'){
+            if (board[rowIndex][cell] == 'orange' && board[rowIndex][cell + 1] == 'orange' && board[rowIndex][cell + 2] == 'orange' && board[rowIndex][cell + 3] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -78,32 +63,14 @@ function checkWinnerColumn(){
     return winner
 }
 
-// function checkWinnerDiagonal(){
-//     if (board[0][0] == 'purple' && board[1][1] == 'purple' && board[2][2] == 'purple'){
-//         return 'purple'
-//     }
-//     if (board[0][0] == 'orange' && board[1][1] == 'orange' && board[2][2] == 'orange'){
-//         return 'orange'
-//     }
-//     if (board[0][2] == 'purple' && board[1][1] == 'purple' && board[2][0] == 'purple'){
-//         return 'purple'
-//     }
-//     if (board[0][2] == 'orange' && board[1][1] == 'orange' && board[2][0] == 'orange'){
-//         return 'orange'
-//     } 
-//     else {
-//         return ''
-//     }
-// }
-
-function checkWinnerDiagonalUp(){
+function checkWinnerColumn() {
     let winner = ''
-    for(let rowIndex=5; rowIndex>2; rowIndex--){
-        for(let columnIndex=0; columnIndex<4; columnIndex++){
-            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex-1][columnIndex+1] == 'purple' && board[rowIndex-2][columnIndex+2] == 'purple' && board[rowIndex-3][columnIndex+3] == 'purple'){
+    for (let columnIndex = 0; columnIndex < 7; columnIndex++) {
+        for (let row = 5; row > 2; row--) {
+            if (board[row][columnIndex] == 'purple' && board[row - 1][columnIndex] == 'purple' && board[row - 2][columnIndex] == 'purple' && board[row - 3][columnIndex] == 'purple') {
                 winner = 'purple'
             }
-            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex-1][columnIndex+1] == 'orange' && board[rowIndex-2][columnIndex+2] == 'orange' && board[rowIndex-3][columnIndex+3] == 'orange'){
+            if (board[row][columnIndex] == 'orange' && board[row - 1][columnIndex] == 'orange' && board[row - 2][columnIndex] == 'orange' && board[row - 3][columnIndex] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -111,14 +78,29 @@ function checkWinnerDiagonalUp(){
     return winner
 }
 
-function checkWinnerDiagonalDown(){
+function checkWinnerDiagonalUp() {
     let winner = ''
-    for(let rowIndex=0; rowIndex<3; rowIndex++){
-        for(let columnIndex=0; columnIndex<4; columnIndex++){
-            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex+1][columnIndex+1] == 'purple' && board[rowIndex+2][columnIndex+2] == 'purple' && board[rowIndex+3][columnIndex+3] == 'purple'){
+    for (let rowIndex = 5; rowIndex > 2; rowIndex--) {
+        for (let columnIndex = 0; columnIndex < 4; columnIndex++) {
+            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex - 1][columnIndex + 1] == 'purple' && board[rowIndex - 2][columnIndex + 2] == 'purple' && board[rowIndex - 3][columnIndex + 3] == 'purple') {
                 winner = 'purple'
             }
-            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex+1][columnIndex+1] == 'orange' && board[rowIndex+2][columnIndex+2] == 'orange' && board[rowIndex+3][columnIndex+3] == 'orange'){
+            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex - 1][columnIndex + 1] == 'orange' && board[rowIndex - 2][columnIndex + 2] == 'orange' && board[rowIndex - 3][columnIndex + 3] == 'orange') {
+                winner = 'orange'
+            }
+        }
+    }
+    return winner
+}
+
+function checkWinnerDiagonalDown() {
+    let winner = ''
+    for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
+        for (let columnIndex = 0; columnIndex < 4; columnIndex++) {
+            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex + 1][columnIndex + 1] == 'purple' && board[rowIndex + 2][columnIndex + 2] == 'purple' && board[rowIndex + 3][columnIndex + 3] == 'purple') {
+                winner = 'purple'
+            }
+            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex + 1][columnIndex + 1] == 'orange' && board[rowIndex + 2][columnIndex + 2] == 'orange' && board[rowIndex + 3][columnIndex + 3] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -127,30 +109,30 @@ function checkWinnerDiagonalDown(){
 }
 
 function checkWinner() {
-    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp(),checkWinnerDiagonalDown()]
+    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp(), checkWinnerDiagonalDown()]
     console.log("checkWinner was called");
     console.log(winner)
 
-    if (winner.includes('purple')){
+    if (winner.includes('purple')) {
         return 'purple'
     }
-    if (winner.includes('orange')){
+    if (winner.includes('orange')) {
         return 'orange'
     }
     //checking all entries are not null
-    if (board.every(entry => entry.includes(null) === false) === true){
+    if (board.every(entry => entry.includes(null) === false) === true) {
         return 'nobody'
     }
 }
 
 // Set the game state back to its original state to play another game.
 function resetGame() {
-    board = [[null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null],
-             [null,null,null,null,null,null,null]]
+    board = [[null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null]]
     console.log("resetGame was called")
     return board
 }

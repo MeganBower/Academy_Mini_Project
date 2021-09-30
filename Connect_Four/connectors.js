@@ -43,13 +43,13 @@ function isValidColumn(columnArray) {
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
 function positionClick(rowIndex, columnIndex, event) {
     const errorColumnFull = checkingNextEmptyRow(columnIndex);
-    if (errorColumnFull === 'full'){
+    if (errorColumnFull === 'full') {
         const errorDisplay = document.getElementById("column-full-display");
         errorDisplay.style.display = "block";
-        function closeError(){
-            document.getElementById("column-full-display").style.display=" none";
-            }
-            window.setTimeout(closeError, 2000 )
+        function closeError() {
+            document.getElementById("column-full-display").style.display = " none";
+        }
+        window.setTimeout(closeError, 2000)
 
     }
     takeTurn(rowIndex, columnIndex);
