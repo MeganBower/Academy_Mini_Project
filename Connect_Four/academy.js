@@ -1,5 +1,6 @@
 // Make your changes to store and update game state in this file
-
+function add(a,b) {
+    return a+b}
 // Take the row and column number between 0 and 2 
 // (inclusive) and update the game state.
 
@@ -11,6 +12,9 @@ let board = [[null, null, null, null, null, null, null],
 [null, null, null, null, null, null, null]]
 
 let playerTurn = 'purple'
+let playerName = 'player2'
+
+const playersTurn = () => playerName
 
 function checkingNextEmptyRow(column) {
     let emptyRow = ''
@@ -34,17 +38,20 @@ function takeTurn(row, column) {
     if (playerTurn === 'purple') {
         board[rowIndex][column] = "purple"
         playerTurn = 'orange'
+        playerName = 'player1'
         console.log(board)
     }
     else {
         board[rowIndex][column] = "orange"
         playerTurn = 'purple'
+        playerName = 'player2'
         console.log(board)
     }
 
     console.log("takeTurn was called with row: " + row + ", column:" + column);
     return board
 }
+
 
 // Return either "purple", "orange" or "nobody" if the game is over.
 // Otherwise return null to continue playing.
@@ -150,9 +157,11 @@ if (typeof exports === 'object') {
     // environments that support module.exports, like Node.
     module.exports = {
         takeTurn,
+        playersTurn,
         checkWinner,
         resetGame,
         getBoard,
+        add,
     }
 } else {
     console.log("Running in Browser")

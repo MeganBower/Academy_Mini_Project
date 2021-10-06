@@ -42,6 +42,14 @@ function isValidColumn(columnArray) {
 
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
 function positionClick(rowIndex, columnIndex, event) {
+    const player1Display = document.getElementById("first-player-display")
+    player1Display.style.display = "none"
+    const player = playersTurn()
+    const playerName = document.getElementById("player-name")
+    playerName.innerText = player
+    const playerDisplay = document.getElementById("player-turn-display");
+    playerDisplay.style.display = "block"
+
     const errorColumnFull = checkingNextEmptyRow(columnIndex);
     if (errorColumnFull === 'full') {
         const errorDisplay = document.getElementById("column-full-display");
@@ -64,7 +72,7 @@ function positionClick(rowIndex, columnIndex, event) {
             throw "Expecting 'checkWinner' to return null or one of the strings 'noughts', 'crosses' or 'nobody'. Actually received: " + winner;
         }
         const winnerName = document.getElementById("winner-name");
-        winnerName.innerText = winner;
+        winnerName.innerText = `${player} (${winner})`;
         const winnerDisplay = document.getElementById("winner-display");
         winnerDisplay.style.display = "block";
     }
@@ -77,6 +85,14 @@ function resetClick(event) {
     winnerName.innerText = "";
     const winnerDisplay = document.getElementById("winner-display");
     winnerDisplay.style.display = "None";
+
+    const playerName = document.getElementById("player-name")
+    playerName.innerText = ""
+    const playerDisplay = document.getElementById("player-turn-display");
+    playerDisplay.style.display = "None"
+
+    const player1Display = document.getElementById("first-player-display")
+    player1Display.style.display = "block"
     clearBoard();
 }
 

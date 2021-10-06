@@ -1,0 +1,15 @@
+{
+  "name": "Connect_Four",
+  "version": "1.0.0",
+  "description": "",
+  "main": "academy.js",
+  "dependencies": {
+    "jest": "^26.2.2"
+  },
+  "scripts": {
+    "test": "jest",
+    "coverage": "npx jest --coverage"
+  },
+  "author": "",
+  "license": "ISC"
+}
