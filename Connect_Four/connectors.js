@@ -61,7 +61,7 @@ function positionClick(rowIndex, columnIndex, event) {
     if (!isValidRowOrColumn(board) || !board.every(isValidColumn)) {
         throw "Expecting 'getBoard' to return a 2d array where all values match are null or one of the strings 'nought' or 'cross'. Actually received: " + JSON.stringify(board);
     }
-
+    
     const player = playerTurnName()
     const colour = playerTurnColour()
     const playerName = document.getElementById("player-name")
@@ -75,7 +75,8 @@ function positionClick(rowIndex, columnIndex, event) {
         if (typeof winner !== "string" || !["purple", "orange", "nobody"].includes(winner)) {
             throw "Expecting 'checkWinner' to return null or one of the strings 'noughts', 'crosses' or 'nobody'. Actually received: " + winner;
         }
-
+        document.getElementById("player1-wins").innerText = storePlayer1Wins()
+        document.getElementById("player2-wins").innerText = storePlayer2Wins()
         const winnerName = document.getElementById("winner-name");
         const player = playerTurnName()
         const winningPlayer = (player === 'player1') ? 'player2' : 'player1'
@@ -125,6 +126,8 @@ window.onload = function () {
     playerName.innerText = player + ' (' + colour + ')'
     const playerDisplay = document.getElementById("player-turn-display");
     playerDisplay.style.display = "block"
+    document.getElementById("player1-wins").innerText = '0'
+    document.getElementById("player2-wins").innerText = '0'
 }
 
 if (typeof exports === 'object') {

@@ -118,6 +118,8 @@ function checkWinnerDiagonalDown() {
     }
     return winner
 }
+let player1Wins = 0
+let player2Wins = 0
 
 function checkWinner() {
     let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp(), checkWinnerDiagonalDown()]
@@ -125,15 +127,25 @@ function checkWinner() {
     console.log(winner)
 
     if (winner.includes('purple')) {
+        player1Wins++
         return 'purple'
     }
     if (winner.includes('orange')) {
+        player2Wins++
         return 'orange'
     }
     //checking all entries are not null
     if (board.every(entry => entry.includes(null) === false) === true) {
         return 'nobody'
     }
+}
+
+function storePlayer1Wins(){
+    return player1Wins
+}
+
+function storePlayer2Wins(){
+    return player2Wins
 }
 
 // Set the game state back to its original state to play another game.
@@ -161,10 +173,13 @@ if (typeof exports === 'object') {
     // environments that support module.exports, like Node.
     module.exports = {
         takeTurn,
-        playersTurn,
+        playerTurnName,
+        playerTurnColour,
         checkWinner,
         resetGame,
         getBoard,
+        storePlayer1Wins,
+        storePlayer2Wins,
     }
 } else {
     console.log("Running in Browser")
