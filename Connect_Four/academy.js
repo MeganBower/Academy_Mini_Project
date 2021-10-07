@@ -1,6 +1,5 @@
 // Make your changes to store and update game state in this file
-function add(a,b) {
-    return a+b}
+
 // Take the row and column number between 0 and 2 
 // (inclusive) and update the game state.
 
@@ -11,44 +10,49 @@ let board = [[null, null, null, null, null, null, null],
 [null, null, null, null, null, null, null],
 [null, null, null, null, null, null, null]]
 
+let playerName = 'player1'
 let playerTurn = 'purple'
-let playerName = 'player2'
 
-const playersTurn = () => playerName
+const playerTurnName = () => playerName
+const playerTurnColour = () => playerTurn
 
-function checkingNextEmptyRow(column) {
+function checkingNextEmptyRow(columnIndex) {
     let emptyRow = ''
-    if (board[0][column] !== null) {
+    if (board[0][columnIndex] !== null) {
         return 'full'
     }
     for (row = 0; row <= 5; row++) {
-        if (board[row][column] === null) {
+        if (board[row][columnIndex] === null) {
             emptyRow = row
         }
     }
     return emptyRow
 }
 
-function takeTurn(row, column) {
-    if (checkingNextEmptyRow(column) === 'full') {
+function takeTurn(row, columnIndex) {
+    if (checkingNextEmptyRow(columnIndex) === 'full') {
         console.log('Column is full - try a different one')
         return board
     }
-    let rowIndex = checkingNextEmptyRow(column)
+    let rowIndex = checkingNextEmptyRow(columnIndex)
     if (playerTurn === 'purple') {
-        board[rowIndex][column] = "purple"
-        playerTurn = 'orange'
-        playerName = 'player1'
+        board[rowIndex][columnIndex] = "purple"
+        if (checkWinner !== ''){
+            playerTurn = 'orange'
+            playerName = 'player2'
+        }
         console.log(board)
     }
     else {
-        board[rowIndex][column] = "orange"
-        playerTurn = 'purple'
-        playerName = 'player2'
+        board[rowIndex][columnIndex] = "orange"
+        if (checkWinner !== ''){
+            playerTurn = 'purple'
+            playerName = 'player1'
+        }
         console.log(board)
     }
 
-    console.log("takeTurn was called with row: " + row + ", column:" + column);
+    console.log("takeTurn was called with row: " + row + ", column:" + columnIndex);
     return board
 }
 
@@ -161,7 +165,6 @@ if (typeof exports === 'object') {
         checkWinner,
         resetGame,
         getBoard,
-        add,
     }
 } else {
     console.log("Running in Browser")

@@ -1,79 +1,88 @@
 const AcademyModule = require('./academy');
 
-test("test adding function", () => {
-    // Consider descriptive test names:
-    "When add is called"
+test("We can place a piece in an empty column", () => {
+    "When takeTurn is called on an empty column the counter goes to the bottom of the column"
 
     // Arrange
-    const a = 2
-    const b = 3
-    const expectedOutput = 5
+    let board = [[null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null],
+    [null, null, null, null, null, null, null]]
+    
+    const row = 1
+    const column = 1
+
+    const expectedOutput = [[null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, "purple", null, null, null, null, null]]
 
     // Act
-    const actualOutput = AcademyModule.add(a,b)
+    const actualOutput = AcademyModule.takeTurn(row, column)
 
     // Assert
     expect(actualOutput).toStrictEqual(expectedOutput)
 })
 
-// test("We can place a piece in an empty column", () => {
-//     // Consider descriptive test names:
-//     // "When place is called on an empty row the counter goes to the bottom of the row"
+test("We can place a second piece in a non empty column", () => {
+    "When takeTurn is called on a column with one piece in, the counter goes to the next available space"
 
-//     // Arrange
-//     let board = [[null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null],
-//     [null, null, null, null, null, null, null]]
+    // Arrange
+    let board = [[null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, "purple", null, null, null, null, null]]
     
-//     const player = "Mike"
-//     const column = 1
+    const row = 2
+    const column = 1
 
-//     const expectedOutput = [
-//         [null, null, null, null], 
-//         ["Mike", null, null, null], 
-//         [null, null, null, null], 
-//         [null, null, null, null]
-//     ];
+    const expectedOutput = [[null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, "orange", null, null, null, null, null],
+                            [null, "purple", null, null, null, null, null]]
 
-//     // Act
-//     const actualOutput = placeModule.place(board, player, column)
+    // Act
+    const actualOutput = AcademyModule.takeTurn(row, column)
 
-//     // Assert
-//     expect(actualOutput).toStrictEqual(expectedOutput)
-// })
+    // Assert
+    expect(actualOutput).toStrictEqual(expectedOutput)
+})
 
-// test("We can place a second piece in a non empty column", () => {
+test("We can place a second piece in a non empty column with more pieces on the board", () => {
+    "When takeTurn is called on a column with one piece in, the counter goes to the next available space"
 
-//     // We can place a piece in a non empty column
-//     // We can place a second piece in an already occupied column
-//     // We can place a piece in an already occupied column
+    // Arrange
+    let board = [[null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, null, null, null, null, null, null],
+                [null, "purple", null, "orange", null, null, null]]
+    
+    const row = 2
+    const column = 1
 
-//     // Arrange
-//     let board = [
-//         [null, null, null, null], 
-//         [null, null, null, null], 
-//         ["Mike", null, null, null], 
-//         [null, null, null, null]
-//     ];
-//     const player = "Emily";
-//     const column = 2;
+    const expectedOutput = [[null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, null, null, null, null, null, null],
+                            [null, "purple", null, null, null, null, null],
+                            [null, "purple", null, "orange", null, null, null]]
 
-//     const expectedOutput = [
-//         [null, null, null, null], 
-//         [null, null, null, null], 
-//         ["Mike", "Emily", null, null], 
-//         [null, null, null, null]
-//     ];
+    // Act
+    const actualOutput = AcademyModule.takeTurn(row, column)
 
-//     // Act
-//     const actualOutput = placeModule.place(board, player, column);
-
-//     // Assert
-//     expect(actualOutput).toStrictEqual(expectedOutput);
-// });
+    // Assert
+    expect(actualOutput).toStrictEqual(expectedOutput)
+})
 
 // test("We can place a third piece in a non empty column", () => {
 //     // Arrange

@@ -42,13 +42,8 @@ function isValidColumn(columnArray) {
 
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
 function positionClick(rowIndex, columnIndex, event) {
-    const player1Display = document.getElementById("first-player-display")
-    player1Display.style.display = "none"
-    const player = playersTurn()
-    const playerName = document.getElementById("player-name")
-    playerName.innerText = player
-    const playerDisplay = document.getElementById("player-turn-display");
-    playerDisplay.style.display = "block"
+    // const player1Display = document.getElementById("first-player-display")
+    // player1Display.style.display = "none"
 
     const errorColumnFull = checkingNextEmptyRow(columnIndex);
     if (errorColumnFull === 'full') {
@@ -60,39 +55,54 @@ function positionClick(rowIndex, columnIndex, event) {
         window.setTimeout(closeError, 2000)
 
     }
+
     takeTurn(rowIndex, columnIndex);
     const board = getBoard();
     if (!isValidRowOrColumn(board) || !board.every(isValidColumn)) {
         throw "Expecting 'getBoard' to return a 2d array where all values match are null or one of the strings 'nought' or 'cross'. Actually received: " + JSON.stringify(board);
     }
+
+    const player = playerTurnName()
+    const colour = playerTurnColour()
+    const playerName = document.getElementById("player-name")
+    playerName.innerText = player + ' (' + colour + ')'
+    const playerDisplay = document.getElementById("player-turn-display");
+    playerDisplay.style.display = "block"
+
     drawBoard(board);
     const winner = checkWinner();
     if (winner) {
         if (typeof winner !== "string" || !["purple", "orange", "nobody"].includes(winner)) {
             throw "Expecting 'checkWinner' to return null or one of the strings 'noughts', 'crosses' or 'nobody'. Actually received: " + winner;
         }
+
         const winnerName = document.getElementById("winner-name");
-        winnerName.innerText = `${player} (${winner})`;
+        const player = playerTurnName()
+        const winningPlayer = (player === 'player1') ? 'player2' : 'player1'
+        winnerName.innerText = `${winningPlayer} (${winner})`; // turnary operator to change player 1/2
         const winnerDisplay = document.getElementById("winner-display");
         winnerDisplay.style.display = "block";
+        playerDisplay.style.display = "none"
     }
 }
 
 // The reset button was clicked, call the game's reset function then reset the DOM.
 function resetClick(event) {
     resetGame();
+    const player = playerTurnName()
+    const colour = playerTurnColour()
+    const playerName = document.getElementById("player-name")
+    playerName.innerText = player + ' (' + colour + ')'
+    const playerDisplay = document.getElementById("player-turn-display");
+    playerDisplay.style.display = "block"
+
     const winnerName = document.getElementById("winner-name");
     winnerName.innerText = "";
     const winnerDisplay = document.getElementById("winner-display");
     winnerDisplay.style.display = "None";
 
-    const playerName = document.getElementById("player-name")
-    playerName.innerText = ""
-    const playerDisplay = document.getElementById("player-turn-display");
-    playerDisplay.style.display = "None"
-
-    const player1Display = document.getElementById("first-player-display")
-    player1Display.style.display = "block"
+    // const player1Display = document.getElementById("first-player-display")
+    // player1Display.style.display = "block"
     clearBoard();
 }
 
@@ -107,6 +117,15 @@ for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
 // Bind the click event for the reset button.
 const resetButton = document.getElementById("reset-button");
 resetButton.addEventListener("click", resetClick);
+
+window.onload = function () {
+    const player = playerTurnName()
+    const colour = playerTurnColour()
+    const playerName = document.getElementById("player-name")
+    playerName.innerText = player + ' (' + colour + ')'
+    const playerDisplay = document.getElementById("player-turn-display");
+    playerDisplay.style.display = "block"
+}
 
 if (typeof exports === 'object') {
     console.log("Running in Node")
