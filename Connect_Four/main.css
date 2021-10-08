@@ -44,7 +44,7 @@ table, th, td {
 }
 
 .column:hover {
-    background-color: #cccccc;
+    background-color: #E0E0E0;
 }
 
 #winner-display {
@@ -99,7 +99,14 @@ h1 {
     font-size: 50px;
 }
 
-#reset-button {
-    margin-top: 10px;
+#reset-board-button {
+    /* margin-top: 10px; */
     font-size: 20;
+    font-family: Copperplate, Fantasy;
+}
+
+#reset-game-button {
+    /* margin-top: 10px; */
+    font-size: 20;
+    font-family: Copperplate, Fantasy;
 }

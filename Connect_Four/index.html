@@ -16,13 +16,13 @@
                <th>Number of Wins</th>
           </tr>
           <tr>
-               <td><input id="player1-Name" type="text" value="'Player 1'" style="font-family: Copperplate, Fantasy" onblur="updatePlayer1NameTurn()">
+               <td><input id="player1-Name" type="text" value="'Player 1'" style="font-family: Copperplate, Fantasy" onfocus="focusFunction()" onblur="updatePlayer1NameTurn()">
                </td>
                <td style="color:purple">Purple</td>
                <td> <span id="player1-wins"></span> </td>
           </tr>
           <tr>
-               <td><input id="player2-Name" type="text" value="'Player 2'" style="font-family: Copperplate, Fantasy">
+               <td><input id="player2-Name" type="text" value="'Player 2'" style="font-family: Copperplate, Fantasy" onfocus="focusFunction2()" onblur="blurFunction2()">
                </td>
                <td style="color:orange">Orange</td>
                <td> <span id="player2-wins"></span> </td>
@@ -87,7 +87,9 @@
                <div class="column" id="row-5-column-6"></div>
           </div>
      </div>
-     <button id="reset-button">Reset</button>
+     <button id="reset-board-button">Reset board</button>
+</br>
+     <button id="reset-game-button" type="reset" onclick="document.location.reload()">Reset game</button>
      <script src="academy.js" type="text/javascript"></script>
      <script src="connectors.js" type="text/javascript"></script>
 </body>

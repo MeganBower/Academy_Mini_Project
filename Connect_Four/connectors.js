@@ -41,16 +41,28 @@ function isValidColumn(columnArray) {
 }
 
 function updatePlayer1NameTurn() {
+    document.getElementById("player1-Name").style.backgroundColor = ""
     var player1Name = document.getElementById("player1-Name").value
     const playerName = document.getElementById("player-name")
     playerName.innerText = player1Name + ' (purple)'
     const playerDisplay = document.getElementById("player-turn-display")
     playerDisplay.style.display = "block"
-  }
+}
+
+function focusFunction() {
+    document.getElementById("player1-Name").style.backgroundColor = "#E0E0E0"
+}
+function blurFunction2() {
+    document.getElementById("player2-Name").style.backgroundColor = ""
+}
+
+function focusFunction2() {
+    document.getElementById("player2-Name").style.backgroundColor = "#E0E0E0"
+}
 
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
 function positionClick(rowIndex, columnIndex, event) {
-    
+
     const errorColumnFull = checkingNextEmptyRow(columnIndex)
     if (errorColumnFull === 'full') {
         const errorDisplay = document.getElementById("column-full-display")
@@ -59,15 +71,15 @@ function positionClick(rowIndex, columnIndex, event) {
             document.getElementById("column-full-display").style.display = " none"
         }
         window.setTimeout(closeError, 2000)
-        
+
     }
-    
+
     takeTurn(rowIndex, columnIndex)
     const board = getBoard()
     if (!isValidRowOrColumn(board) || !board.every(isValidColumn)) {
         throw "Expecting 'getBoard' to return a 2d array where all values match are null or one of the strings 'nought' or 'cross'. Actually received: " + JSON.stringify(board)
     }
-    
+
     const colour = playerTurnColour()
     const player1Name = document.getElementById("player1-Name").value
     const player2Name = document.getElementById("player2-Name").value
@@ -126,7 +138,7 @@ for (let rowIndex = 0; rowIndex < 6; rowIndex++) {
 }
 
 // Bind the click event for the reset button.
-const resetButton = document.getElementById("reset-button")
+const resetButton = document.getElementById("reset-board-button")
 resetButton.addEventListener("click", resetClick)
 
 window.onload = function () {
@@ -154,6 +166,9 @@ if (typeof exports === 'object') {
         positionClick,
         resetClick,
         updatePlayer1NameTurn,
+        focusFunction,
+        focusFunction2,
+        blurFunction2,
     }
 } else {
     console.log("Running in Browser")
