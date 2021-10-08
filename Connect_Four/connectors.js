@@ -62,8 +62,11 @@ function positionClick(rowIndex, columnIndex, event) {
         throw "Expecting 'getBoard' to return a 2d array where all values match are null or one of the strings 'nought' or 'cross'. Actually received: " + JSON.stringify(board);
     }
     
-    const player = playerTurnName()
     const colour = playerTurnColour()
+    const player1Name = document.getElementById("player1-Name").value
+    const player2Name = document.getElementById("player2-Name").value
+    const player = (colour === 'purple') ? player1Name : player2Name
+    
     const playerName = document.getElementById("player-name")
     playerName.innerText = player + ' (' + colour + ')'
     const playerDisplay = document.getElementById("player-turn-display");
@@ -78,8 +81,10 @@ function positionClick(rowIndex, columnIndex, event) {
         document.getElementById("player1-wins").innerText = storePlayer1Wins()
         document.getElementById("player2-wins").innerText = storePlayer2Wins()
         const winnerName = document.getElementById("winner-name");
-        const player = playerTurnName()
-        const winningPlayer = (player === 'player1') ? 'player2' : 'player1'
+        const playerTurn = playerTurnName()
+        const player1Name = document.getElementById("player1-Name").value
+        const player2Name = document.getElementById("player2-Name").value
+        const winningPlayer = (playerTurn === 'player1') ? player2Name : player1Name
         winnerName.innerText = `${winningPlayer} (${winner})`; // turnary operator to change player 1/2
         const winnerDisplay = document.getElementById("winner-display");
         winnerDisplay.style.display = "block";
@@ -90,8 +95,11 @@ function positionClick(rowIndex, columnIndex, event) {
 // The reset button was clicked, call the game's reset function then reset the DOM.
 function resetClick(event) {
     resetGame();
-    const player = playerTurnName()
+    // const player = playerTurnName()
     const colour = playerTurnColour()
+    const player1Name = document.getElementById("player1-Name").value
+    const player2Name = document.getElementById("player2-Name").value
+    const player = (colour === 'purple') ? player1Name : player2Name
     const playerName = document.getElementById("player-name")
     playerName.innerText = player + ' (' + colour + ')'
     const playerDisplay = document.getElementById("player-turn-display");
@@ -120,8 +128,10 @@ const resetButton = document.getElementById("reset-button");
 resetButton.addEventListener("click", resetClick);
 
 window.onload = function () {
-    const player = playerTurnName()
     const colour = playerTurnColour()
+    const player1Name = document.getElementById("player1-Name").value
+    const player2Name = document.getElementById("player2-Name").value
+    const player = (colour === 'purple') ? player1Name : player2Name
     const playerName = document.getElementById("player-name")
     playerName.innerText = player + ' (' + colour + ')'
     const playerDisplay = document.getElementById("player-turn-display");
