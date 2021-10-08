@@ -40,9 +40,17 @@ function isValidColumn(columnArray) {
     return isValidRowOrColumn(columnArray) && columnArray.every(function (item) { return ["purple", "orange", null].includes(item); })
 }
 
+function updatePlayer1NameTurn() {
+    var player1Name = document.getElementById("player1-Name").value
+    const playerName = document.getElementById("player-name")
+    playerName.innerText = player1Name + ' (purple)'
+    const playerDisplay = document.getElementById("player-turn-display")
+    playerDisplay.style.display = "block"
+  }
+
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
 function positionClick(rowIndex, columnIndex, event) {
-
+    
     const errorColumnFull = checkingNextEmptyRow(columnIndex)
     if (errorColumnFull === 'full') {
         const errorDisplay = document.getElementById("column-full-display")
@@ -51,9 +59,9 @@ function positionClick(rowIndex, columnIndex, event) {
             document.getElementById("column-full-display").style.display = " none"
         }
         window.setTimeout(closeError, 2000)
-
+        
     }
-
+    
     takeTurn(rowIndex, columnIndex)
     const board = getBoard()
     if (!isValidRowOrColumn(board) || !board.every(isValidColumn)) {
@@ -64,11 +72,11 @@ function positionClick(rowIndex, columnIndex, event) {
     const player1Name = document.getElementById("player1-Name").value
     const player2Name = document.getElementById("player2-Name").value
     const player = (colour === 'purple') ? player1Name : player2Name
-    
     const playerName = document.getElementById("player-name")
     playerName.innerText = player + ' (' + colour + ')'
     const playerDisplay = document.getElementById("player-turn-display")
     playerDisplay.style.display = "block"
+
 
     drawBoard(board)
     const winner = checkWinner()
@@ -80,8 +88,6 @@ function positionClick(rowIndex, columnIndex, event) {
         document.getElementById("player2-wins").innerText = storePlayer2Wins()
         const winnerName = document.getElementById("winner-name")
         const playerTurn = playerTurnName()
-        const player1Name = document.getElementById("player1-Name").value
-        const player2Name = document.getElementById("player2-Name").value
         const winningPlayer = (playerTurn === 'player1') ? player2Name : player1Name
         winnerName.innerText = `${winningPlayer} (${winner})`
         const winnerDisplay = document.getElementById("winner-display")
@@ -147,6 +153,7 @@ if (typeof exports === 'object') {
         isValidColumn,
         positionClick,
         resetClick,
+        updatePlayer1NameTurn,
     }
 } else {
     console.log("Running in Browser")
