@@ -100,13 +100,15 @@ h1 {
 }
 
 #reset-board-button {
-    /* margin-top: 10px; */
-    font-size: 20;
+    font-size: 30;
     font-family: Copperplate, Fantasy;
+    background-color: #50a4c0;
+    padding: 8px 8px;
 }
 
 #reset-game-button {
-    /* margin-top: 10px; */
-    font-size: 20;
+    font-size: 30;
     font-family: Copperplate, Fantasy;
+    background-color: rgb(226, 226, 23);
+    padding: 8px 8px;
 }
