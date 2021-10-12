@@ -40,9 +40,10 @@ function isValidColumn(columnArray) {
     return isValidRowOrColumn(columnArray) && columnArray.every(function (item) { return ["purple", "orange", null].includes(item); })
 }
 
+
 function updatePlayer1NameTurn() {
     document.getElementById("player1-Name").style.backgroundColor = ""
-    var player1Name = document.getElementById("player1-Name").value
+    const player1Name = document.getElementById("player1-Name").value
     const playerName = document.getElementById("player-name")
     playerName.innerText = player1Name + ' (purple)'
     const playerDisplay = document.getElementById("player-turn-display")
@@ -111,7 +112,6 @@ function positionClick(rowIndex, columnIndex, event) {
 // The reset button was clicked, call the game's reset function then reset the DOM.
 function resetClick(event) {
     resetGame()
-    // const player = playerTurnName()
     const colour = playerTurnColour()
     const player1Name = document.getElementById("player1-Name").value
     const player2Name = document.getElementById("player2-Name").value

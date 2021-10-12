@@ -10,7 +10,6 @@ table, th, td {
     text-align: center;
     color: black;
     border:1px solid black;
-    /* font-family: "Courier New", Monospace; */
     font-family: Copperplate, Fantasy;
     font-size: 20px;
     display: center;
@@ -18,8 +17,7 @@ table, th, td {
     margin-right: auto;
 }
 
-.column {
-    /* this is a cell within the row */
+.column /* this is a cell within the row */{
     width: 100px;
     height: 100px;
     margin: 0px;
@@ -28,7 +26,6 @@ table, th, td {
     justify-content: center;
     align-items: center;
     font-size: 78px;
-    /* border-radius: 50%; */
 }
 
 .row {

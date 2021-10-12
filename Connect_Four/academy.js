@@ -1,8 +1,3 @@
-// Make your changes to store and update game state in this file
-
-// Take the row and column number between 0 and 2 
-// (inclusive) and update the game state.
-
 let board = [[null, null, null, null, null, null, null],
 [null, null, null, null, null, null, null],
 [null, null, null, null, null, null, null],
@@ -118,6 +113,7 @@ function checkWinnerDiagonalDown() {
     }
     return winner
 }
+
 let player1Wins = 0
 let player2Wins = 0
 
@@ -160,8 +156,7 @@ function resetGame() {
     return board
 }
 
-// Return the current board state with either a "purple" or a "orange" in
-// each position. Put a null in a position that hasn't been played yet.
+// Return the current board state
 function getBoard() {
     console.log("getBoard was called");
     return board;
