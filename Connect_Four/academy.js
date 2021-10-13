@@ -11,13 +11,13 @@ let playerTurn = 'purple'
 const playerTurnName = () => playerName
 const playerTurnColour = () => playerTurn
 
-function checkingNextEmptyRow(columnIndex) {
+function checkingNextEmptyRow(columnIndex, gameBoard) {
     let emptyRow = ''
-    if (board[0][columnIndex] !== null) {
+    if (gameBoard[0][columnIndex] !== null) {
         return 'full'
     }
     for (row = 0; row <= 5; row++) {
-        if (board[row][columnIndex] === null) {
+        if (gameBoard[row][columnIndex] === null) {
             emptyRow = row
         }
     }
@@ -29,7 +29,7 @@ function takeTurn(row, columnIndex) {
         console.log('Column is full - try a different one')
         return board
     }
-    let rowIndex = checkingNextEmptyRow(columnIndex)
+    let rowIndex = checkingNextEmptyRow(columnIndex, board)
     if (playerTurn === 'purple') {
         board[rowIndex][columnIndex] = "purple"
         if (checkWinner !== ''){
@@ -167,6 +167,7 @@ if (typeof exports === 'object') {
     // Node. Does not work with strict CommonJS, but only CommonJS-like 
     // environments that support module.exports, like Node.
     module.exports = {
+        checkingNextEmptyRow,
         takeTurn,
         playerTurnName,
         playerTurnColour,

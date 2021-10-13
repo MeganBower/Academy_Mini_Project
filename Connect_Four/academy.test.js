@@ -395,3 +395,152 @@ describe("When we call checkWinnerDiagonalDown", () => {
         expect(actualOutput).toStrictEqual(expectedOutput)
     })
 })
+
+describe("When we call checkingNextEmptyRow", () => {
+    test("it returns 5 when there are no pieces in the column", () => {
+
+        // Arrange
+        let columnIndex = 0
+
+        let inputBoard =[[null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null]]
+
+        const expectedOutput = 5
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+
+    test("it returns 4 when there is 1 piece in the column", () => {
+
+        // Arrange
+        let columnIndex = 1
+
+        let inputBoard =[[null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, "purple", null, null, null, null, null]]
+
+        const expectedOutput = 4
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+
+    test("it returns 3 when there are 2 pieces in the column", () => {
+
+        // Arrange
+        let columnIndex = 2
+
+        let inputBoard =[[null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, "orange", null, null, null, null],
+        [null, null, "purple", null, null, null, null]]
+
+        const expectedOutput = 3
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+
+    test("it returns 2 when there are 3 pieces in the column", () => {
+
+        // Arrange
+        let columnIndex = 3
+
+        let inputBoard =[[null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, "purple", null, null, null],
+        [null, null, null, "orange", null, null, null],
+        [null, null, null, "purple", null, null, null]]
+
+        const expectedOutput = 2
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+
+    test("it returns 1 when there are 4 pieces in the column", () => {
+
+        // Arrange
+        let columnIndex = 4
+
+        let inputBoard =[[null, null, null, null, null, null, null],
+        [null, null, null, null, null, null, null],
+        [null, null, null, null, "orange", null, null],
+        [null, null, null, null, "purple", null, null],
+        [null, null, null, null, "orange", null, null],
+        [null, null, null, null, "purple", null, null]]
+
+        const expectedOutput = 1
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+
+    test("it returns 0 when there are 5 pieces in the column", () => {
+
+        // Arrange
+        let columnIndex = 5
+
+        let inputBoard =[[null, null, null, null, null, null, null],
+        [null, null, null, null, null, "purple", null],
+        [null, null, null, null, null, "orange", null],
+        [null, null, null, null, null, "purple", null],
+        [null, null, null, null, null, "orange", null],
+        [null, null, null, null, null, "purple", null]]
+
+        const expectedOutput = 0
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+
+    test("it returns full when there are 6 pieces in the column", () => {
+
+        // Arrange
+        let columnIndex = 6
+
+        let inputBoard =[[null, null, null, null, null, null, "orange"],
+        [null, null, null, null, null, null, "purple"],
+        [null, null, null, null, null, null, "orange"],
+        [null, null, null, null, null, null, "purple"],
+        [null, null, null, null, null, null, "orange"],
+        [null, null, null, null, null, null, "purple"]]
+
+        const expectedOutput = 'full'
+
+        // Act
+        const actualOutput = AcademyModule.checkingNextEmptyRow(columnIndex, inputBoard)
+
+        // Assert
+        expect(actualOutput).toStrictEqual(expectedOutput)
+    })
+})

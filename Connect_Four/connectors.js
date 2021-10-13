@@ -64,7 +64,7 @@ function focusFunction2() {
 // A grid position was clicked call the game's turn function, redraw and then check for a winner.
 function positionClick(rowIndex, columnIndex, event) {
 
-    const errorColumnFull = checkingNextEmptyRow(columnIndex)
+    const errorColumnFull = checkingNextEmptyRow(columnIndex, board)
     const errorDisplay = document.getElementById("column-full-display")
     if (errorColumnFull === 'full') {
         errorDisplay.style.display = "block"
