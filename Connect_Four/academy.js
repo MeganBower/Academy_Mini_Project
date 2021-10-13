@@ -54,14 +54,14 @@ function takeTurn(row, columnIndex) {
 
 // Return either "purple", "orange" or "nobody" if the game is over.
 // Otherwise return null to continue playing.
-function checkWinnerRow() {
+function checkWinnerRow(gameBoard) {
     let winner = ''
     for (let rowIndex = 5; rowIndex >= 0; rowIndex--) {
         for (let cell = 0; cell < 4; cell++) {
-            if (board[rowIndex][cell] == 'purple' && board[rowIndex][cell + 1] == 'purple' && board[rowIndex][cell + 2] == 'purple' && board[rowIndex][cell + 3] == 'purple') {
+            if (gameBoard[rowIndex][cell] == 'purple' && gameBoard[rowIndex][cell + 1] == 'purple' && gameBoard[rowIndex][cell + 2] == 'purple' && gameBoard[rowIndex][cell + 3] == 'purple') {
                 winner = 'purple'
             }
-            if (board[rowIndex][cell] == 'orange' && board[rowIndex][cell + 1] == 'orange' && board[rowIndex][cell + 2] == 'orange' && board[rowIndex][cell + 3] == 'orange') {
+            if (gameBoard[rowIndex][cell] == 'orange' && gameBoard[rowIndex][cell + 1] == 'orange' && gameBoard[rowIndex][cell + 2] == 'orange' && gameBoard[rowIndex][cell + 3] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -69,14 +69,14 @@ function checkWinnerRow() {
     return winner
 }
 
-function checkWinnerColumn() {
+function checkWinnerColumn(gameBoard) {
     let winner = ''
     for (let columnIndex = 0; columnIndex < 7; columnIndex++) {
         for (let row = 5; row > 2; row--) {
-            if (board[row][columnIndex] == 'purple' && board[row - 1][columnIndex] == 'purple' && board[row - 2][columnIndex] == 'purple' && board[row - 3][columnIndex] == 'purple') {
+            if (gameBoard[row][columnIndex] == 'purple' && gameBoard[row - 1][columnIndex] == 'purple' && gameBoard[row - 2][columnIndex] == 'purple' && gameBoard[row - 3][columnIndex] == 'purple') {
                 winner = 'purple'
             }
-            if (board[row][columnIndex] == 'orange' && board[row - 1][columnIndex] == 'orange' && board[row - 2][columnIndex] == 'orange' && board[row - 3][columnIndex] == 'orange') {
+            if (gameBoard[row][columnIndex] == 'orange' && gameBoard[row - 1][columnIndex] == 'orange' && gameBoard[row - 2][columnIndex] == 'orange' && gameBoard[row - 3][columnIndex] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -84,14 +84,14 @@ function checkWinnerColumn() {
     return winner
 }
 
-function checkWinnerDiagonalUp() {
+function checkWinnerDiagonalUp(gameBoard) {
     let winner = ''
     for (let rowIndex = 5; rowIndex > 2; rowIndex--) {
         for (let columnIndex = 0; columnIndex < 4; columnIndex++) {
-            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex - 1][columnIndex + 1] == 'purple' && board[rowIndex - 2][columnIndex + 2] == 'purple' && board[rowIndex - 3][columnIndex + 3] == 'purple') {
+            if (gameBoard[rowIndex][columnIndex] == 'purple' && gameBoard[rowIndex - 1][columnIndex + 1] == 'purple' && gameBoard[rowIndex - 2][columnIndex + 2] == 'purple' && gameBoard[rowIndex - 3][columnIndex + 3] == 'purple') {
                 winner = 'purple'
             }
-            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex - 1][columnIndex + 1] == 'orange' && board[rowIndex - 2][columnIndex + 2] == 'orange' && board[rowIndex - 3][columnIndex + 3] == 'orange') {
+            if (gameBoard[rowIndex][columnIndex] == 'orange' && gameBoard[rowIndex - 1][columnIndex + 1] == 'orange' && gameBoard[rowIndex - 2][columnIndex + 2] == 'orange' && gameBoard[rowIndex - 3][columnIndex + 3] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -99,14 +99,14 @@ function checkWinnerDiagonalUp() {
     return winner
 }
 
-function checkWinnerDiagonalDown() {
+function checkWinnerDiagonalDown(gameBoard) {
     let winner = ''
     for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
         for (let columnIndex = 0; columnIndex < 4; columnIndex++) {
-            if (board[rowIndex][columnIndex] == 'purple' && board[rowIndex + 1][columnIndex + 1] == 'purple' && board[rowIndex + 2][columnIndex + 2] == 'purple' && board[rowIndex + 3][columnIndex + 3] == 'purple') {
+            if (gameBoard[rowIndex][columnIndex] == 'purple' && gameBoard[rowIndex + 1][columnIndex + 1] == 'purple' && gameBoard[rowIndex + 2][columnIndex + 2] == 'purple' && gameBoard[rowIndex + 3][columnIndex + 3] == 'purple') {
                 winner = 'purple'
             }
-            if (board[rowIndex][columnIndex] == 'orange' && board[rowIndex + 1][columnIndex + 1] == 'orange' && board[rowIndex + 2][columnIndex + 2] == 'orange' && board[rowIndex + 3][columnIndex + 3] == 'orange') {
+            if (gameBoard[rowIndex][columnIndex] == 'orange' && gameBoard[rowIndex + 1][columnIndex + 1] == 'orange' && gameBoard[rowIndex + 2][columnIndex + 2] == 'orange' && gameBoard[rowIndex + 3][columnIndex + 3] == 'orange') {
                 winner = 'orange'
             }
         }
@@ -118,7 +118,7 @@ let player1Wins = 0
 let player2Wins = 0
 
 function checkWinner() {
-    let winner = [checkWinnerRow(), checkWinnerColumn(), checkWinnerDiagonalUp(), checkWinnerDiagonalDown()]
+    let winner = [checkWinnerRow(board), checkWinnerColumn(board), checkWinnerDiagonalUp(board), checkWinnerDiagonalDown(board)]
     console.log("checkWinner was called");
     console.log(winner)
 
@@ -171,6 +171,10 @@ if (typeof exports === 'object') {
         playerTurnName,
         playerTurnColour,
         checkWinner,
+        checkWinnerRow,
+        checkWinnerColumn,
+        checkWinnerDiagonalUp,
+        checkWinnerDiagonalDown,
         resetGame,
         getBoard,
         storePlayer1Wins,
