@@ -25,7 +25,7 @@ function checkingNextEmptyRow(columnIndex) {
 }
 
 function takeTurn(row, columnIndex) {
-    if (checkingNextEmptyRow(columnIndex) === 'full') {
+    if (checkingNextEmptyRow(columnIndex, board) === 'full') {
         console.log('Column is full - try a different one')
         return board
     }

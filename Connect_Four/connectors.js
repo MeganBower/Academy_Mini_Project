@@ -65,8 +65,8 @@ function focusFunction2() {
 function positionClick(rowIndex, columnIndex, event) {
 
     const errorColumnFull = checkingNextEmptyRow(columnIndex)
+    const errorDisplay = document.getElementById("column-full-display")
     if (errorColumnFull === 'full') {
-        const errorDisplay = document.getElementById("column-full-display")
         errorDisplay.style.display = "block"
         function closeError() {
             document.getElementById("column-full-display").style.display = " none"
@@ -76,7 +76,6 @@ function positionClick(rowIndex, columnIndex, event) {
     }
 
     takeTurn(rowIndex, columnIndex)
-    const board = getBoard()
     if (!isValidRowOrColumn(board) || !board.every(isValidColumn)) {
         throw "Expecting 'getBoard' to return a 2d array where all values match are null or one of the strings 'nought' or 'cross'. Actually received: " + JSON.stringify(board)
     }
@@ -93,17 +92,22 @@ function positionClick(rowIndex, columnIndex, event) {
 
     drawBoard(board)
     const winner = checkWinner()
+    const winnerName = document.getElementById("winner-name")
+    const winnerDisplay = document.getElementById("winner-display")
+    if (winner === "nobody"){
+        winnerName.innerText = `nobody`
+        winnerDisplay.style.display = "block"
+        playerDisplay.style.display = "none"
+    }
     if (winner) {
-        if (typeof winner !== "string" || !["purple", "orange", "nobody"].includes(winner)) {
+        if (typeof winner !== "string" || !["purple", "orange"].includes(winner)) {
             throw "Expecting 'checkWinner' to return null or one of the strings 'noughts', 'crosses' or 'nobody'. Actually received: " + winner
         }
         document.getElementById("player1-wins").innerText = storePlayer1Wins()
         document.getElementById("player2-wins").innerText = storePlayer2Wins()
-        const winnerName = document.getElementById("winner-name")
         const playerTurn = playerTurnName()
         const winningPlayer = (playerTurn === 'player1') ? player2Name : player1Name
         winnerName.innerText = `${winningPlayer} (${winner})`
-        const winnerDisplay = document.getElementById("winner-display")
         winnerDisplay.style.display = "block"
         playerDisplay.style.display = "none"
     }
